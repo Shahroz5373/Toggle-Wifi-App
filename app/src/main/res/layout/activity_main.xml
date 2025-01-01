@@ -21,30 +21,14 @@
         android:textStyle="bold"
         android:layout_marginBottom="30dp"/>
 
-    <Button
-        android:id="@+id/On"
+    <Switch
+        android:id="@+id/wifiSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/text"
         android:layout_centerHorizontal="true"
-        android:text="Wifi On"
-        android:textSize="18sp"
         android:layout_marginBottom="30dp"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:backgroundTint="#D2042D"/>
-
-    <Button
-        android:id="@+id/Off"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/On"
-        android:layout_centerHorizontal="true"
-        android:text="Wifi Off"
-        android:textSize="18sp"
-        android:layout_marginBottom="30dp"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:backgroundTint="#5194ef"/>
+        android:text="Wifi On/Off"
+        android:textSize="18sp"/>
 
 </RelativeLayout>

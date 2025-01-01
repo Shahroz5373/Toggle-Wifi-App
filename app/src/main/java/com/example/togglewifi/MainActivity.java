@@ -1,53 +1,46 @@
 package com.example.togglewifi;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.view.View;
-import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
+
+    private Switch wifiSwitch;
+    private WifiManager wifiManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button button_On = findViewById(R.id.On);
-        Button button_Off = findViewById(R.id.Off);
+        wifiSwitch = findViewById(R.id.wifiSwitch);
+        wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
 
-        button_On.setOnClickListener(new View.OnClickListener() {
+        // Check the current Wi-Fi state and set the switch accordingly
+        if (wifiManager.isWifiEnabled()) {
+            wifiSwitch.setChecked(true);
+        } else {
+            wifiSwitch.setChecked(false);
+        }
+
+        // Set a listener for the switch
+        wifiSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-
-                    Intent intent = new Intent(Settings.ACTION_WIFI_SETTINGS);
-                    startActivity(intent);
+                    // For Android Q and above, open Wi-Fi settings
+                    startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
                 } else {
-
-                    WifiManager wifiManager = (WifiManager) getApplicationContext()
-                            .getSystemService(WIFI_SERVICE);
-                    wifiManager.setWifiEnabled(true);
-                }
-            }
-        });
-
-        button_Off.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-
-                    Intent intent = new Intent(Settings.ACTION_WIFI_SETTINGS);
-                    startActivity(intent);
-                } else {
-
-                    WifiManager wifiManager = (WifiManager) getApplicationContext()
-                            .getSystemService(WIFI_SERVICE);
-                    wifiManager.setWifiEnabled(false);
+                    // Toggle Wi-Fi state
+                    wifiManager.setWifiEnabled(isChecked);
                 }
             }
         });
