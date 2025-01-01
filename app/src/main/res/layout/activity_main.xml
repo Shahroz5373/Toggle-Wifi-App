@@ -26,9 +26,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/text"
+        android:textColor="@color/black"
+        android:shadowColor="#33fff0"
         android:layout_centerHorizontal="true"
+        android:padding="10dp"
         android:layout_marginBottom="30dp"
         android:text="Wifi On/Off"
-        android:textSize="18sp"/>
+        android:textSize="18sp"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
 
 </RelativeLayout>

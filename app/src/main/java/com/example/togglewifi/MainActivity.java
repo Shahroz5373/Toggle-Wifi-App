@@ -36,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    // For Android Q and above, open Wi-Fi settings
-                    startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+                    Intent intent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+                    startActivity(intent);
                 } else {
                     // Toggle Wi-Fi state
                     wifiManager.setWifiEnabled(isChecked);
