@@ -24,14 +24,14 @@ public class MainActivity extends AppCompatActivity {
         wifiSwitch = findViewById(R.id.wifiSwitch);
         wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
 
-        // Check the current Wi-Fi state and set the switch accordingly
+
         if (wifiManager.isWifiEnabled()) {
             wifiSwitch.setChecked(true);
         } else {
             wifiSwitch.setChecked(false);
         }
 
-        // Set a listener for the switch
+
         wifiSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
                     startActivity(intent);
                 } else {
-                    // Toggle Wi-Fi state
+
                     wifiManager.setWifiEnabled(isChecked);
                 }
             }
