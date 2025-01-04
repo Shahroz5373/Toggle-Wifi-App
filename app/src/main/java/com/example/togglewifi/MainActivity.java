@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                boolean enableWifi = checkedId == R.id.radioOn;
+                boolean enableWifi = (checkedId == R.id.radioOn);
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                     Intent intent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
