@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private RadioButton radioOn;
+    private  RadioButton radioOn;
     private RadioButton radioOff;
     private WifiManager wifiManager;
 
@@ -22,19 +22,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Initialize your RadioButtons
+
         radioOn = findViewById(R.id.radioOn);
         radioOff = findViewById(R.id.radioOff);
         wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
 
-        // Set initial state based on WiFi status
-        if (wifiManager.isWifiEnabled()) {
-            radioOn.setChecked(true);
-        } else {
-            radioOff.setChecked(true);
+        if (wifiManager==null) {
+            radioOn.setEnabled(false);
+            radioOff.setEnabled(false);
+        }
+        else {
+            if (wifiManager.isWifiEnabled()) {
+                radioOn.setChecked(true);
+            } else {
+                radioOff.setChecked(true);
+            }
         }
 
-        // Set listener for RadioButton changes
         RadioGroup radioGroup = findViewById(R.id.radioGroup);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
