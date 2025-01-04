@@ -21,20 +21,39 @@
         android:textStyle="bold"
         android:layout_marginBottom="30dp"/>
 
-    <Switch
-        android:id="@+id/wifiSwitch"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:saveEnabled="true"
-        android:background="#33fff0"
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/background_area"
         android:layout_below="@id/text"
-        android:textColor="@color/black"
-        android:textStyle="bold"
         android:layout_centerHorizontal="true"
         android:padding="10dp"
-        android:layout_marginBottom="30dp"
-        android:text="Wifi On/Off"
-        android:textSize="18sp"
-        tools:ignore="UseSwitchCompatOrMaterialXml" />
+        android:layout_marginBottom="30dp">
 
+        <RadioButton
+            android:id="@+id/radioOn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="On"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:background="@drawable/radio_button_selector"
+            android:button="@null"
+            android:padding="10dp" />
+
+        <RadioButton
+            android:id="@+id/radioOff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Off"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:background="@drawable/radio_button_selector"
+            android:button="@null"
+            android:padding="10dp" />
+    </RadioGroup>
 </RelativeLayout>

@@ -6,14 +6,15 @@ import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.widget.CompoundButton;
-import android.widget.Switch;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Switch wifiSwitch;
+    private RadioButton radioOn;
+    private RadioButton radioOff;
     private WifiManager wifiManager;
 
     @Override
@@ -21,26 +22,30 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        wifiSwitch = findViewById(R.id.wifiSwitch);
+        // Initialize your RadioButtons
+        radioOn = findViewById(R.id.radioOn);
+        radioOff = findViewById(R.id.radioOff);
         wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
 
-
+        // Set initial state based on WiFi status
         if (wifiManager.isWifiEnabled()) {
-            wifiSwitch.setChecked(true);
+            radioOn.setChecked(true);
         } else {
-            wifiSwitch.setChecked(false);
+            radioOff.setChecked(true);
         }
 
-
-        wifiSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        // Set listener for RadioButton changes
+        RadioGroup radioGroup = findViewById(R.id.radioGroup);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                boolean enableWifi = checkedId == R.id.radioOn;
+
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                     Intent intent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
                     startActivity(intent);
                 } else {
-
-                    wifiManager.setWifiEnabled(isChecked);
+                    wifiManager.setWifiEnabled(enableWifi);
                 }
             }
         });
